@@ -8,56 +8,174 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    body {
-      background-color: #ffd;
-      padding-bottom: 4rem;
-    }
-     .dark body {
-      background-color: #1a202c;
-      color: #e2e8f0;
-    }
-    .dark .checkout-section,
-    .dark .about-section,
-    .dark .product-card,
-    .dark .category-card {
-      background-color: #2d3748;
-      color: #ffd;
-    }
-    .dark .contact-form input,
-    .dark .contact-form textarea {
-      background-color: #4a5568;
-      color: #e2e8f0;
+    :root {
+      /* Light Mode: Bright & Colorful */
+      --light-bg: linear-gradient(135deg, #FFF7E0 0%, #FFEBEB 100%);
+      --light-text: #e6bc48;
+      --light-card-bg: rgba(247, 241, 241, 0.7);
+      --light-accent: #FF6E40; /* Vibrant Coral */
+      --light-accent-hover: #FF5722;
+      --light-shadow: rgba(93, 64, 55, 0.1);
+
+      /* Dark Mode: Sleek & Modern */
+      --dark-bg: #121212;
+      --dark-text: #E0E0E0;
+      --dark-card-bg: #1E1E1E;
+      --dark-accent: #03DAC6; /* Teal */
+      --dark-accent-hover: #01BEA4;
+      --dark-shadow: rgba(0, 0, 0, 0.2);
     }
 
-    .checkout-section {
-      background: rgba(255,255,255,0.7);
-      padding: 2rem;
-      margin: 1rem;
+    body {
+      background: var(--light-bg);
+      color: var(--light-text);
+      padding-bottom: 4rem;
+      font-family: 'Roboto', sans-serif;
+      transition: background 0.5s ease, color 0.3s ease;
+    }
+
+    .dark body {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+    
+    .section-title, h1, h2, h3 {
+        font-family: 'Lora', serif;
+        color: inherit !important;
+    }
+
+    /* Cards & Modals */
+    .product-card, .category-card, .about-section, .checkout-section, #authModal > div, #searchModal > div, #cartModal > div, .notification-item, .contact-section, .card {
+      background-color: var(--light-card-bg) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px var(--light-shadow);
+      transition: all 0.3s ease;
     }
-    .notification-badge {
+    
+    .dark .product-card, .dark .category-card, .dark .about-section, .dark .checkout-section, .dark #authModal > div, .dark #searchModal > div, .dark #cartModal > div, .dark .notification-item, .dark .contact-section {
+      background-color: var(--dark-card-bg) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 20px var(--dark-shadow) !important;
+      color: var(--dark-text) !important;
+    }
+
+    /* Header & Nav */
+    header.fixed, nav.fixed {
+      background: rgba(255, 255, 255, 0.5) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .dark header.fixed, .dark nav.fixed {
+      background: rgba(30, 30, 30, 0.5) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    header.fixed *, nav.fixed * {
+      color: var(--light-text) !important;
+    }
+    .dark header.fixed *, .dark nav.fixed * {
+      color: var(--dark-text) !important;
+    }
+    
+    /* Buttons */
+    .cart-btn, button[type="submit"], #scrollToTopBtn, .bg-blue-500, .bg-green-500 {
+      background-color: var(--light-accent) !important;
+      color: white !important;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .cart-btn:hover, button[type="submit"]:hover, #scrollToTopBtn:hover, .bg-blue-500:hover, .bg-green-500:hover {
+      background-color: var(--light-accent-hover) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .dark .cart-btn, .dark button[type="submit"], .dark #scrollToTopBtn, .dark .bg-blue-500, .dark .bg-green-500 {
+        background-color: var(--dark-accent) !important;
+        color: #121212 !important;
+    }
+    .dark .cart-btn:hover, .dark button[type="submit"]:hover, .dark #scrollToTopBtn:hover, .dark .bg-blue-500:hover, .dark .bg-green-500:hover {
+        background-color: var(--dark-accent-hover) !important;
+    }
+    
+    /* Inputs */
+    input, textarea {
+      background-color: rgba(255,255,255,0.8) !important;
+      border: 1px solid rgba(0,0,0,0.1) !important;
+      border-radius: 8px !important;
+      color: var(--light-text) !important;
+    }
+     input::placeholder, textarea::placeholder {
+      color: var(--light-text) !important;
+      opacity: 0.7;
+    }
+
+    .dark input, .dark textarea {
+      background-color: rgba(40,40,40,0.8) !important;
+      border-color: rgba(255,255,255,0.2) !important;
+      color: var(--dark-text) !important;
+    }
+    .dark input::placeholder, .dark textarea::placeholder {
+      color: var(--dark-text) !important;
+      opacity: 0.7;
+    }
+    
+    /* Links and special text */
+    .text-gold, .highlight-item i, a, .text-blue-500 {
+        color: var(--light-accent) !important;
+    }
+    .dark .text-gold, .dark .highlight-item i, .dark a, .dark .text-blue-500 {
+        color: var(--dark-accent) !important;
+    }
+    
+    /* Notification Badges */
+    .notification-badge, #cartCount {
+      background-color: var(--light-accent) !important;
+      color: white !important;
+    }
+    .dark .notification-badge, .dark #cartCount {
+        background-color: var(--dark-accent) !important;
+        color: var(--dark-bg) !important;
+    }
+    .discount-badge {
+      background-color: var(--light-accent) !important;
+      color: white !important;
+    }
+    .dark .discount-badge {
+      background-color: var(--dark-accent) !important;
+      color: var(--dark-bg) !important;
+    }
+    
+    .product-name {
       position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ff4;
-      color: black;
-      font-size: 0.75rem;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #FFD700; /* Yellow */
+      padding: 12px;
+      margin: 0;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+    .dark .product-name {
+      background: rgba(0, 0, 0, 0.7);
     }
+
+    .dark #searchResults {
+      background-color: var(--dark-card-bg) !important;
+      color: var(--dark-text) !important;
+    }
+    .dark #searchResults > div:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Keep structural and animation styles */
     @media (min-width: 768px) {
       .product-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -80,6 +198,7 @@
       margin-top: 4rem;
       margin-bottom: 4rem;
       min-height: calc(100vh - 8rem);
+      animation: fadeIn 0.5s ease-in-out;
     }
     .screen.active {
       display: block;
@@ -97,17 +216,6 @@
       max-height: 500px;
       opacity: 1;
       transform: translateY(0);
-    }
-    .product-name {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 12px;
-      margin: 0;
-      font-size: 1.1rem;
     }
     .discount-badge {
       position: absolute;
@@ -258,6 +366,18 @@
     nav.fixed {
       z-index: 999;
     }
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 5rem;
+      right: 1rem;
+      display: none;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 100;
+      border: none;
+    }
        /* Splash Screen Styles */
     #splashScreen {
       position: fixed;
@@ -295,6 +415,10 @@
     @keyframes fadeOut {
       from { opacity: 1; }
       to { opacity: 0; visibility: hidden; }
+    }
+
+    .contact-form input, .contact-form textarea {
+        width: 100%;
     }
 
   </style>
@@ -362,12 +486,12 @@
     <div class="bg-white p-4 mx-4 mt-20 rounded-lg">
       <div class="relative">
         <input type="text" id="searchInput" placeholder="Search products..." class="w-full p-2 border rounded" onkeyup="handleSearch()">
-        <div id="searchResults" class="absolute w-full bg-white mt-1 shadow-lg rounded-lg hidden"> <span class="button" type="onclick" >close</span></div>
+        <div id="searchResults" class="absolute w-full bg-white mt-1 shadow-lg rounded-lg hidden"></div>
              </div>   
       <div id="comingSoonSection" class="hidden mt-4">
         <p class="text-gray-600">Don't see what you're looking for?</p>
         <form id="requestForm" class="mt-2">
-          <input type="text" placeholder="Suggest a pastry..." class="w-full p-2 border rounded mb-2">
+          <input type="text" id="requestInput" placeholder="Suggest a pastry..." class="w-full p-2 border rounded mb-2">
           <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded">Request Item</button>
           <button onclick="toggleSearch()" aria-label="Search products" class="mt-2 float-right text-gray-600">Close</button>
         </form>
@@ -594,8 +718,8 @@
   </div>
 </div>
 <div id="profilePage" class="screen p-6">
-    <div class="bg-green-300 dark:bg-gray-500 rounded-lg shadow-md text-gray-600 p-6">
-      <div id="userProfile" class="hidden">
+    <div class="space-y-8">
+      <div id="userProfile" class="hidden card p-6">
         <h2 class="text-2xl font-bold mb-4">Profile</h2>
         <div class="space-y-2">
           <p>Name: <span id="profileName"></span></p>
@@ -603,14 +727,14 @@
         </div>
         <button onclick="logout()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Logout</button>
       </div>
-   <div class="mb-8">
+   <div class="card p-6">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold">Notifications</h2>
             <span id="notificationCount" class="bg-red-500 text-white px-2 rounded-full">3</span>
           </div>
           <div id="notificationList" class="space-y-4"></div>
         </div>
-        <div class="contact-section">
+        <div class="contact-section p-6">
           <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
           <form id="messageForm" class="contact-form space-y-4">
             <input type="text" id="messageName" placeholder="Your Name" required>
@@ -724,29 +848,36 @@ let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     function loadCategory(category) {
       const container = document.getElementById('categoryProducts');
       if(!container) return;
-      const categoryProducts = products[category] || [];
-      container.innerHTML = categoryProducts.map(product => `
-        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
-          <div class="image-container relative cursor-pointer" onclick="toggleProductDetails(this)">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-            <h3 class="product-name">${product.name}</h3>
-            ${product.discount > 0 ? `<div class="discount-badge">${product.discount}% OFF</div>` : ''}
-          </div>
-          <div class="product-details">
-            <p class="p-4 text-sm">${product.desc}</p>
-            <div class="px-4 pb-4 flex justify-between items-center">
-              <span class="text-lg font-bold">Ksh ${product.price}</span>
-              <button onclick="addToCart(${product.id})" class="cart-btn">Add to Cart</button>
+      
+      container.style.opacity = '0';
+      setTimeout(() => {
+        const categoryProducts = products[category] || [];
+        container.innerHTML = categoryProducts.map(product => `
+          <div class="product-card bg-white rounded-lg shadow-md overflow-hidden animate-fade-in">
+            <div class="image-container relative cursor-pointer" onclick="toggleProductDetails(this)">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+              <h3 class="product-name">${product.name}</h3>
+              ${product.discount > 0 ? `<div class="discount-badge">${product.discount}% OFF</div>` : ''}
+            </div>
+            <div class="product-details">
+              <p class="p-4 text-sm">${product.desc}</p>
+              <div class="px-4 pb-4 flex justify-between items-center">
+                <span class="text-lg font-bold">Ksh ${product.price}</span>
+                <button onclick="addToCart(${product.id})" class="cart-btn">Add to Cart</button>
+              </div>
             </div>
           </div>
-        </div>
-      `).join('');
-      setTimeout(() => {
-        container.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }, 100);
+        `).join('');
+        container.style.opacity = '1';
+        container.style.transition = 'opacity 0.5s';
+        
+        setTimeout(() => {
+            container.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
+      }, 300);
     }
     const users = JSON.parse(localStorage.getItem('users')) || [];
     function toggleAuthModal() {
@@ -1009,7 +1140,7 @@ function updateCheckoutDisplay() {
   `).join('');
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  checkoutTotal.textContent = total;// Update M-Pesa amount
+  checkoutTotal.textContent = total;
 }
 
 // Function to confirm M-Pesa payment
@@ -1252,9 +1383,10 @@ function processMpesaPayment() {
     }
 
     function showPage(pageId) {
-      document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-      });
+      const activeScreen = document.querySelector('.screen.active');
+      if (activeScreen) {
+        activeScreen.classList.remove('active');
+      }
 
       const targetPage = document.getElementById(pageId);
       if (targetPage) {
@@ -1262,11 +1394,11 @@ function processMpesaPayment() {
         
         if (pageId === 'menuPage') {
           loadCategory('cakes');
-          setTimeout(() => targetPage.scrollTo(0, 0), 50);
         }
         if (pageId === 'checkoutPage') {
           updateCheckoutDisplay();
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -1280,7 +1412,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       // Fallback in case animation doesn't trigger
       setTimeout(() => {
-        splashScreen.remove();
+        if(splashScreen) splashScreen.remove();
       }, 4000); // 3s animation + 1s buffer
     });
 
@@ -1295,16 +1427,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
         localStorage.setItem('productsLoaded', 'true');
       }
 
-      document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        showToast('Request submitted successfully!');
-        this.reset();
-      });
+      document.getElementById('requestForm').addEventListener('submit', handleRequestSubmit);
 
       document.getElementById('messageForm').addEventListener('submit', function(e) {
         e.preventDefault();
         showToast('Message sent successfully!');
         this.reset();
+      });
+
+      // Close modals on outside click
+      ['searchModal', 'cartModal', 'authModal'].forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.classList.add('hidden');
+          }
+        });
+      });
+
+      const scrollToTopBtn = document.createElement('button');
+      scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+      scrollToTopBtn.id = 'scrollToTopBtn';
+      document.body.appendChild(scrollToTopBtn);
+
+      window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          scrollToTopBtn.style.display = "block";
+        } else {
+          scrollToTopBtn.style.display = "none";
+        }
+      };
+
+      scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
       });
     });
   </script>
